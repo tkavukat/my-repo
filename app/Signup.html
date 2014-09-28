@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>signup</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <form name="signup_form" novalidate 
+            ng-submit="signupForm()"
+            ng-controller="SignupController" >
+            <div class="container-fluid">
+                <legend><span>Signup</span></legend>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="col-md-1">Your Name</label>
+                        <div class="col-md-2">
+                            <input class="form-control" type="text" class="form-control" name="name" ng-model="signup.name" ng-minlength="3" ng-maxlength="10" required placeholder="Enter your name" />
+                        </div>
+                        <div class="bg-danger" ng-show="signup_form.name.$dirty && signup_form.name.$invalid && signup_form.submitted">
+                            <small class="text-danger" ng-show="signup_form.name.$error.required">Your name is required!</small>
+                            <small class="text-danger" ng-show="signup_form.name.$error.minlength">Name required to be more than 3 characters.</small>
+                            <small class="text-danger" ng-show="signup_form.name.$error.maxlength">Name shouldn't excide 10 characters.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="col-md-1">Your Email</label>
+                        <div class="col-md-2">
+                            <input class="form-control" type="email" name="email" ng-model="signup.email" required placeholder="Enter your email" />
+                        </div>
+                        <div class="bg-danger" ng-show="signup_form.email.$dirty && signup_form.email.$invalid && signup_form.submitted">
+                            <small class="text-danger" ng-show="signup_form.email.$error.required">email is required!</small>
+                            <small class="text-danger" ng-show="signup_form.email.$error.email">email not valid!</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="col-md-1">Your Username</label>
+                        <div class="col-md-2">
+                            <input class="form-control" type="text" name="username" ng-model="signup.username" required placeholder="Enter your username" ng-minlength="3" ng-maxlength ="10" ensure-unique="username" />
+                        </div>
+                        <div class="bg-danger" ng-show="signup_form.username.$dirty && signup_form.username.$invalid && signup_form.submitted">
+                            <small class="text-danger" ng-show="signup_form.username.$error.required">username is required!</small>
+                            <small class="text-danger" ng-show="signup_form.username.$error.minlength">Username can't be less than three characters.</small>
+                            <small class="text-danger" ng-show="signup_form.username.$error.maxlength">Username can't be more than ten characters.</small>
+                            <small class="text-danger" ng-show="signup_form.username.$error.unique">That username is taken, please try another.</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- ng-disabled="signup_form.$invalid" -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-primary">Cancel</button>
+            </div>
+        </form>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="directives/ensureUnique.js"></script>
+        <script type="text/javascript" src="SignupController.js"></script>
+    </body>
+</html>
